@@ -1,0 +1,314 @@
+<app-masterheader></app-masterheader>
+
+ 
+
+
+<!-- delete user -->
+
+<div class="card" *ngIf="flag_deluser" style="width: 800px;max-width: 800px;position: relative;top: 100px;left: 300px;">
+    <div class="app" style="display: flex;">
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-warning" type="button" (click)="addUser()">ADD USER</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" type="button" (click)="deleteUser()">DELETE USER</button>&nbsp;&nbsp;
+        <!-- </div> -->
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-success" type="button" (click)="editUser()">EDIT USER</button>&nbsp;&nbsp;
+        <!-- </div> -->
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-secondary" type="button" (click)="editAdmin()">EDIT ADMIN</button>&nbsp;&nbsp;
+        <!-- </div> -->
+    </div>
+    <br>
+    <div class="card-header">
+        <h3>Delete User </h3>
+    </div>
+    <div class="card-body">
+        <div class="col-md-6">
+            <label>User ID <span style="color: red;">*</span></label>
+            <!-- <ngx-select-dropdown tabindex="0" [multiple]="false" [config]="config" [(ngModel)]="eventDel" (change)="checkEvent_del($event)"
+                [options]="userList">
+            </ngx-select-dropdown> -->
+            <select class="form-control" [(ngModel)]="del_userid" >
+                <option *ngFor="let item of userList" value="{{item.id}}">{{item.userid}}</option>
+            </select>
+        </div>
+        
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-danger" type="button" (click)="del_User()">SUBMIT</button>
+    </div>
+</div>
+
+<!-- edit user -->
+
+<div class="card" *ngIf="flag_edituser" style="width: 800px;max-width: 800px;position: relative;top: 100px;left: 300px;">
+    <div class="app" style="display: flex;">
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-warning" type="button" (click)="addUser()">ADD USER</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" type="button" (click)="deleteUser()">DELETE USER</button>&nbsp;&nbsp;
+        <!-- </div> -->
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-success" type="button" (click)="editUser()">EDIT USER</button>&nbsp;&nbsp;
+        <!-- </div> -->
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-secondary" type="button" (click)="editAdmin()">EDIT ADMIN</button>&nbsp;&nbsp;
+        <!-- </div> -->
+    </div>
+    <br>
+    <div class="card-header">
+        <h3>Edit User</h3>
+    </div>
+    <div class="card-body">
+       
+        <div class="row" style="display: flex;">
+            <div class="col-md-6">
+                <label>User ID <span style="color: red;">*</span></label>
+ 
+                <select class="form-control" [(ngModel)]="edit_userid" (change)="checkEvent_Edit()">
+                    <option *ngFor="let item of userList" value="{{item.id}}">{{item.userid}}</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label>Password</label>
+                <input type="text" [(ngModel)]="edit_password" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label>First Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="edit_nameFirst">
+            </div>
+            <div class="col-md-6">
+                <label>Last Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="edit_nameLast">
+            </div>
+            <div class="col-md-6">
+                <label>Address Name</label>
+                <input type="text" class="form-control" [(ngModel)]="edit_address">
+            </div>
+            <div class="col-md-6">
+                <label>Phone</label>
+                <input type="text" class="form-control" [(ngModel)]="edit_phone"  #userEmail="ngModel">
+                <!-- <div *ngIf="userEmail.errors?.pattern" style="color: red;">  
+                    Invalid phone number  
+                </div>  -->
+            </div>
+            <div class="col-md-6">
+                <label>User Category <span style="color: red;">*</span></label>
+                <select class="form-control" [(ngModel)]="edit_role" (change)="userChange()">
+                    <option value="CCK">CCK</option>
+                    <option value="MCC">MCC</option>
+                </select>
+            </div>
+            <!-- <div class="col-md-6" *ngIf="subRole">
+                <input type="checkbox" value="traffic" [(ngModel)]="edit_traffic">
+                <label>Traffic Sites</label>&nbsp;&nbsp;
+
+                <input type="checkbox" value="cemetery" [(ngModel)]="edit_cemetery">
+                <label>Cemetery Sites</label><br>
+            </div> -->
+            <div class="col-md-6">
+                <label>PTZ Control <span style="color: red;">*</span></label>
+                <select class="form-control" [(ngModel)]="edit_ptzcontrol">
+                    <option value="PTZ-CONTROL">PTZ-CONTROL</option>
+                    <option value="VIEW-ONLY">VIEW-ONLY</option>
+                </select>
+                <!-- <select class="form-control" [(ngModel)]="ptzcontrol">
+                    <option value="CCK">CCK</option>
+                    <option value="MCC">MCC</option>
+                </select> -->
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-danger" type="button" (click)="edit_User()">SUBMIT</button>
+    </div>
+</div>
+
+<!-- edit admin -->
+<div class="card" *ngIf="flag_admin" style="width: 800px;max-width: 800px;position: relative;top: 100px;left: 300px;">
+    <div class="app" style="display: flex;">
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-warning" type="button" (click)="addUser()">ADD USER</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" type="button" (click)="deleteUser()">DELETE USER</button>&nbsp;&nbsp;
+        <!-- </div> -->
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-success" type="button" (click)="editUser()">EDIT USER</button>&nbsp;&nbsp;
+        <!-- </div> -->
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-secondary" type="button" (click)="editAdmin()">EDIT ADMIN</button>&nbsp;&nbsp;
+        <!-- </div> -->
+    </div>
+    <br>
+    <div class="card-header">
+        <h3>Edit Admin</h3>
+    </div>
+    <div class="card-body">
+        <div class="row" style="display: flex;">
+            <div class="col-md-6">
+                <label>New Password</label>
+                <input type="password" class="form-control" [(ngModel)]="pwd1">
+            </div>
+            <div class="col-md-6">
+                <label>Confirm New Password</label>
+                <input type="password" class="form-control" [(ngModel)]="pwd2">
+            </div>
+            <div class="col-md-6">
+                <label>Email</label>
+                <input type="text" class="form-control" disabled [value]="admin_email" [(ngModel)]="admin_email" [pattern]="emailPattern" #userEmail="ngModel">
+                <!-- <div *ngIf="userEmail.errors?.pattern" style="color: red;">  
+                    Email not valid.  
+                </div>  -->
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-danger" type="button" (click)="edit_Admin()">SUBMIT</button>
+    </div>
+</div>
+
+<!-- add user -->
+<div class="card" *ngIf="flag_adduser" style="width: 800px;max-width: 800px;position: relative;top: 100px;left: 300px;">
+    <div class="app" style="display: flex;">
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-warning" type="button" (click)="addUser()">ADD USER</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" type="button" (click)="deleteUser()">DELETE USER</button>&nbsp;&nbsp;
+        <!-- </div> -->
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-success" type="button" (click)="editUser()">EDIT USER</button>&nbsp;&nbsp;
+        <!-- </div> -->
+        <!-- <div class="col-md-2 "> -->
+            <button class="btn btn-secondary" type="button" (click)="editAdmin()">EDIT ADMIN</button>&nbsp;&nbsp;
+        <!-- </div> -->
+    </div>
+    <br>
+    <div class="card-header">
+        <h3>Add User</h3>
+    </div>
+    <div class="card-body">
+        <div class="row" style="display: flex;">
+            <!-- <div class="col-md-6">
+                <label>Mail ID <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="username" [pattern]="emailPattern" #userEmail="ngModel">
+                <div *ngIf="userEmail.errors?.pattern" style="color: red;">  
+                    Email not valid.  
+                </div> 
+            </div> -->
+            <div class="col-md-6">
+                <label>Username <span style="color: red;">*</span></label>
+                <input type="text" [(ngModel)]="username" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label>Password <span style="color: red;">*</span></label>
+                <input type="password" [(ngModel)]="password" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label>First Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="nameFirst">
+            </div>
+            <div class="col-md-6">
+                <label>Last Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="nameLast">
+            </div>
+            <div class="col-md-6">
+                <label>Address</label>
+                <input type="text" class="form-control" [(ngModel)]="address">
+            </div>
+            <div class="col-md-6">
+                <label>Phone</label>
+                <input type="text" class="form-control" [(ngModel)]="phone" [pattern]="mobnumPattern" #userEmail="ngModel">
+                <!-- <div *ngIf="userEmail.errors?.pattern" style="color: red;">  
+                    Invalid phone number  
+                </div>  -->
+            </div>
+            <div class="col-md-6">
+                <label>User Category <span style="color: red;">*</span></label>
+                <select class="form-control" [(ngModel)]="role" (change)="userChange()">
+                    <option value="CCK">CCK</option>
+                    <option value="MCC">MCC</option>
+                </select>
+            </div>
+            <!-- <div class="col-md-6" *ngIf="subRole" style="margin-left: 400px;margin-top: 10px;">
+                <input type="checkbox" value="traffic" [(ngModel)]="traffic">
+                <label>Traffic Sites</label>&nbsp;&nbsp;
+
+                <input type="checkbox" value="cemetery" [(ngModel)]="cemetery">
+                <label>Cemetery Sites</label><br>
+            </div> -->
+            <!-- New -->
+            <div class="col-md-6">
+                <label>PTZ Control <span style="color: red;">*</span></label>
+                <select class="form-control" [(ngModel)]="ptzcontrol">
+                    <option value="PTZ-CONTROL">PTZ-CONTROL</option>
+                    <option value="VIEW-ONLY">VIEW-ONLY</option>
+                </select>
+                <!-- <select class="form-control" [(ngModel)]="ptzcontrol">
+                    <option value="CCK">CCK</option>
+                    <option value="MCC">MCC</option>
+                </select> -->
+            </div>
+            
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-danger" type="button" (click)="createUser()">SUBMIT</button>
+    </div>
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" 
+        size = "medium" color = "#fff" type = "ball-clip-rotate-pulse" [fullScreen] = "true">
+        <!-- <p style="color: white" > Loading... </p>--></ngx-spinner> 
+<!-- <div class="container" *ngIf="flag_adduser">
+
+    <div id="signup">
+
+        <div class="header">
+        
+            <h3>New User Account</h3>
+            
+        </div>
+        
+        <div class="sep"></div>
+
+        <div class="inputs">
+            <div class="row" style="display: flex;">
+                <div class="col-md-6">
+                    <input type="text" placeholder="First Name" [(ngModel)]="nameFirst" required/>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" placeholder="Last Name" [(ngModel)]="nameLast"/>
+                </div>
+
+                <div class="col-md-12">
+                    <input type="text" placeholder="Address" [(ngModel)]="address"/>
+                </div>
+                <div class="col-md-6">
+                    <input type="email" placeholder="UserID" [(ngModel)]="username" [pattern]="emailPattern" #userEmail="ngModel" required/>
+                    <div *ngIf="userEmail.errors?.pattern" style="color: red;">  
+                        Email not valid.  
+                    </div> 
+                </div>
+
+                <div class="col-md-6">
+                    <input type="text" placeholder="Phone number" [(ngModel)]="phone" [pattern]="mobnumPattern" #userPhone="ngModel"/>
+                    <div *ngIf="userPhone.errors?.pattern" style="color: red;">  
+                        Phone number not valid.  
+                    </div> 
+                </div>
+                <div class="col-md-6">
+                    <label>User Category</label>
+                    <select class="form-control" [(ngModel)]="role" (change)="userChange()">
+                        <option value="CCK">CCK</option>
+                        <option value="MCC">MCC</option>
+                    </select>
+                </div>
+                <div class="col-md-6" *ngIf="subRole">
+                    <input type="checkbox" value="traffic" [(ngModel)]="traffic">
+                    <label>Traffic Sites</label>
+                    <input type="checkbox" value="cemetery" [(ngModel)]="cemetery">
+                    <label>Cemetery Sites</label><br>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="button" id="submit" (click)="createUser()">CREATE USER</button>
+        </div>
+
+    </div>
+
+</div> -->

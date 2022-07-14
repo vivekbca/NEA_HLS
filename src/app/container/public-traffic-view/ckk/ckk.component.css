@@ -1,0 +1,26 @@
+.first-txt { 
+    position: absolute; 
+    top: 85px; 
+    left: 200px; 
+
+} 
+.first-txt2 { 
+    position: absolute; 
+    top: 240px; 
+    left: 230px; 
+
+} 
+.card-body
+{
+    border-style: solid;
+    border-color: black;
+    
+}
+
+.card {
+    width:650px;
+}
+
+.card-text {
+    font-size: 20px;
+}

@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script type="text/javascript"
+    src="https://flashphoner.com/downloads/builds/flashphoner_client/wcs_api-2.0/current/flashphoner.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/hlsplay1.js"></script>
+  <script type="text/javascript" src="assets/js/hlsplay2.js"></script>
+</head>
+<body>
+  <header class="cmn-header">
+    <div class="logo">
+      <a href="#"><img src="./assets/img/logo.png" /></a>
+    </div>
+    <div class="search-box">
+      <strong>Welcome {{userid}}</strong><br />
+      <!-- <span>Last Login : 19-03-2021, 01:23pm</span> -->
+    </div>
+    <div class="ryt-option">
+      <a href="#"><img src="./assets/eSentinel.png" /></a>
+    </div>
+  </header>
+
+  <menu>
+    <ul>
+      <li>
+        <a></a>
+      </li>
+    </ul>
+  </menu>
+  <div class="left-menu">
+    <nav>
+      <ul>
+        <li *ngIf="showUser">
+          <a href="#type" routerLink="/container/cameraconfig">Camera Allotment<span><i class="fa fa-angle-right"
+                aria-hidden="true"></i></span></a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" routerLink="/container/dashboardviewonly">Dashboard<span><i class="fa fa-angle-right"
+                aria-hidden="true"></i></span></a>
+        </li>
+        <li *ngIf="showUser">
+          <a href="javascript:void(0);" routerLink="/container/adduser">User Management<span><i
+                class="fa fa-angle-right" aria-hidden="true"></i></span></a>
+        </li>
+        <li *ngIf="showUser">
+          <a href="#date" routerLink="/container/logreport">Log Report<span><i class="fa fa-angle-right"
+                aria-hidden="true"></i></span></a>
+        </li>
+        <!-- <li>
+                    <a href="#date">Snap Shot<span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>          
+               </li>	 -->
+        <li>
+          <a href="javascript:void(0);" routerLink (click)="logout()">Logout<span><i class="fa fa-angle-right"
+                aria-hidden="true"></i></span></a>
+        </li>
+      </ul>
+      <p class="copyrightTxt">eSectinel V 1.1.0 Build 20201201. Copyright 2021 Echol Tech Pte Ltd. All Rights Reserved.
+      </p>
+    </nav>
+  </div>
+
+  <div class="main-wapper">
+    <div class="wapper-body">
+      <div>
+        <label><h5>Tiles Count</h5></label>
+         <select class="form-control" [(ngModel)]="tilescount" (change)="changeTiles()">
+        <option disabled>Select Tiles</option>
+        <option value="4">4</option>
+        <option value="8">8</option>
+        <option value="12">12</option>
+        <option value="16">16</option>
+    </select>
+  </div><br>
+      <div class="row">
+        <!-- <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-mob-12" *ngFor="let item of camList">
+
+          <div class="card">
+            <div>
+
+              <video id="videotiles" ng-change="onChangeEvent(item.ip)"></video>
+             
+            </div>        
+            <div class="dtls-box">
+              <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+                (click)="changeCam(item.ip,item.name)"><i class="fa fa-video-camera" aria-hidden="true"></i>CAM
+                {{item.name}}</span>
+            </div>
+          </div>
+        
+        </div> -->
+        <!-- card 0 -->
+        <div class="card" *ngIf="1<=camlength && 4<=tilescount">
+          <div>
+
+            <video id="Streaming0" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box"> 
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[0]['ip'],camList[0]['name'],camList[0]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[0]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam1()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 1 -->
+        <div class="card" *ngIf="2<=camlength && 4<=tilescount">  
+          <div>
+
+            <video id="Streaming1" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[1]['ip'],camList[1]['name'],camList[1]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[1]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam2()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 2 -->
+        <div class="card" *ngIf="3<=camlength && 4<=tilescount">
+          <div>
+
+            <video id="Streaming2" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[2]['ip'],camList[2]['name'],camList[2]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[2]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam3()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 3 -->
+        <div class="card" *ngIf="4<=camlength && 4<=tilescount">
+          <div>
+
+            <video id="Streaming3" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[3]['ip'],camList[3]['name'],camList[3]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[3]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam4()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 4 -->
+        <div class="card" *ngIf="5<=camlength && 8<=tilescount">
+          <div>
+
+            <video id="Streaming4" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[4]['ip'],camList[4]['name'],camList[4]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[4]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam5()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 5 -->
+        <div class="card" *ngIf="6<=camlength && 8<=tilescount">
+          <div>
+
+            <video id="Streaming5" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[5]['ip'],camList[5]['name'],camList[5]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[5]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam6()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 6 -->
+        <div class="card" *ngIf="7<=camlength && 8<=tilescount">
+          <div>
+
+            <video id="Streaming6" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[6]['ip'],camList[6]['name'],camList[6]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[6]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam7()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 7 -->
+        <div class="card" *ngIf="8<=camlength && 8<=tilescount">
+          <div>
+
+            <video id="Streaming7" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[7]['ip'],camList[7]['name'],camList[7]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[7]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam8()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 8 -->
+        <div class="card" *ngIf="9<=camlength && 12<=tilescount">
+          <div>
+
+            <video id="Streaming8" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[8]['ip'],camList[8]['name'],camList[8]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[8]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam9()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 9 -->
+        <div class="card" *ngIf="10<=camlength && 12<=tilescount">
+          <div>
+
+            <video id="Streaming9" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[9]['ip'],camList[9]['name'],camList[9]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[9]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam10()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 10 -->
+        <div class="card" *ngIf="11<=camlength && 12<=tilescount">
+          <div>
+
+            <video id="Streaming10" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[10]['ip'],camList[10]['name'],camList[10]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[10]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam11()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 11 -->
+        <div class="card" *ngIf="12<=camlength && 12<=tilescount">
+          <div>
+
+            <video id="Streaming11" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[11]['ip'],camList[11]['name'],camList[11]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[11]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam12()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 12 -->
+        <div class="card" *ngIf="13<=camlength && 16<=tilescount">
+          <div>
+
+            <video id="Streaming12" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[12]['ip'],camList[12]['name'],camList[12]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[12]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam13()">Refresh</button>
+          </div>
+        </div>&nbsp;
+        <!-- card 13 -->
+        <div class="card" *ngIf="14<=camlength && 16<=tilescount">
+          <div>
+
+            <video id="Streaming13" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[13]['ip'],camList[13]['name'],camList[13]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[13]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam14()">Refresh</button>
+          </div>
+        </div>&nbsp;
+  <!-- card 14 -->
+  <div class="card" *ngIf="15<=camlength && 16<=tilescount">
+    <div>
+
+      <video id="Streaming14" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+     
+    </div>        
+    <div class="dtls-box">
+      <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+      (click)="changeCam(camList[14]['ip'],camList[14]['name'],camList[14]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+        {{camList[14]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam15()">Refresh</button>
+    </div>
+  </div>&nbsp;
+    <!-- card 15 -->
+    <div class="card" *ngIf="16<=camlength && 16<=tilescount">
+      <div>
+
+        <video id="Streaming15" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+       
+      </div>        
+      <div class="dtls-box">
+        <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+        (click)="changeCam(camList[15]['ip'],camList[15]['name'],camList[15]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+          {{camList[15]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam16()">Refresh</button>
+      </div>
+    </div>&nbsp;
+      <!-- card 16 -->
+      <div class="card" *ngIf="17<=camlength && 20<=tilescount">
+        <div>
+
+          <video id="Streaming16" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+         
+        </div>        
+        <div class="dtls-box">
+          <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+          (click)="changeCam(camList[16]['ip'],camList[16]['name'],camList[16]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+            {{camList[16]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam17()">Refresh</button>
+        </div>
+      </div>&nbsp;
+        <!-- card 17 -->
+        <div class="card" *ngIf="18<=camlength && 20<=tilescount">
+          <div>
+
+            <video id="Streaming17" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+           
+          </div>        
+          <div class="dtls-box">
+            <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+            (click)="changeCam(camList[17]['ip'],camList[17]['name'],camList[17]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+              {{camList[17]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam18()">Refresh</button>
+          </div>
+        </div>&nbsp;
+          <!-- card 18 -->
+          <div class="card" *ngIf="19<=camlength && 20<=tilescount">
+            <div>
+  
+              <video id="Streaming18" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+             
+            </div>        
+            <div class="dtls-box">
+              <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+              (click)="changeCam(camList[18]['ip'],camList[18]['name'],camList[18]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>
+                {{camList[18]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam19()">Refresh</button>
+            </div>
+          </div>
+           <!-- card 19 -->
+           <div class="card" *ngIf="20<=camlength && 20<=tilescount">
+            <div>
+  
+              <video id="Streaming19" width="300px" height="150px" style="margin-top:20px" autoplay controls muted playsinline></video>
+             
+            </div>        
+            <div class="dtls-box">
+              <span class="clr-sky user1" data-toggle="modal" data-target="#myModal1"
+              (click)="changeCam(camList[19]['ip'],camList[19]['name'],camList[19]['cameraname'])"><i class="fa fa-video-camera" aria-hidden="true"></i>CAM
+                {{camList[19]['cameraname']}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="RefreshCam20()">Refresh</button>
+            </div>
+          </div>
+      </div>
+
+
+
+      <!-- Modal 1 -->
+      <div id="myModal1" class="modal fade" role="dialog" size="" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">LIVE STREAMING</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+                <span aria-hidden="true" style='font-size: 24pt;'>&times;</span>
+              </button>
+              <h5>{{camname}}</h5>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div>
+
+                  <!-- <video id="video" width="600px" height="500px" style="display: block; width: 900px;"></video> -->
+                  <!-- <video class="videoPlayer" width="600px" height="500px" style="display: block; width: 900px;" vtype="hlsll" autoplay controls muted playsinline></video> -->
+                 
+                    <video id="mse-video" vtype="mse"  autoplay controls muted playsinline width="1130px" height="500px"></video>
+              
+
+                </div>&nbsp;&nbsp;&nbsp;
+                <div>
+                  <div class="card5" *ngIf="showControl">
+                    <!-- Navigation -->
+                    <div style="text-align: center;color: whitesmoke;">
+                      <h5>Navigation</h5>
+                    </div>
+
+                    <!-- <button class="button button5" style="margin-right: 100px;font-size: 40px;" (click)="stop()"><span>&#128307;</span></button> -->
+
+                    <br> <button class="button button5" style="font-size: 40px;margin-left: 60px;"
+                      (click)="up()"><img src="./assets/img/up.jpg" height="35px" width="35px"></button>
+                    <button class="button button5" style="font-size: 40px;margin-right: 60px;"
+                      (click)="left()"><img src="./assets/img/left.jpg" height="35px" width="35px"></button>
+
+                    <!-- <button class="button button5" style="margin-right: 100pxpx;" (click)="stop()">&#9744;</button> -->
+
+                    <button class="button button5" style="font-size: 40px;margin-bottom: 40px;margin-left: 23px ;"
+                      (click)="right()"><img src="./assets/img/right.jpg" height="35px" width="35px"></button>
+                    <button class="button button5" style="font-size: 40px;margin-left: 60px;margin-top: -60px;"
+                      (click)="down()"><img src="./assets/img/down.jpg" height="35px" width="35px"></button><br>
+                    <!-- Zoom -->
+                    <br>
+                    <h5 style="color: whitesmoke;text-align: center;">Zoom</h5>
+                    <br>
+                    <div class="row">
+                      <br><button class="button2 button6" style="font-size: 40px;margin-left: 55px;"
+                        (click)="zoomout()">&#8722;</button>
+                      <button class="button2 button6" style="font-size: 40px;" (click)="zoomin()">&#43;</button>
+                    </div>
+                    <br>
+                    <div style="color: whitesmoke;text-align: center;"><h5>PTZ Speed</h5></div>
+                    <div><ngx-slider style="color: whitesmoke;" [(value)]="value" [options]="Options"></ngx-slider></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="close()">Close</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

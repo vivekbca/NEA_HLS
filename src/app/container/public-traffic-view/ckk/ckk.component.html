@@ -1,0 +1,148 @@
+
+<!-- 
+    <div class="back">
+        <nav class="navbar navbar-light"  style="background: #811a1b;">
+            <a class="navbar-brand" href="#">
+              <h1 style="color: aliceblue;"><img src="assets/Echollogo.png" height="50px"></h1>
+            </a>
+          </nav>
+        https://angular-maps.com/guides/getting-started/
+https://www.itsolutionstuff.com/post/angular-10-google-maps-example-tutorialexample.html
+https://www.positronx.io/how-to-integrate-google-maps-in-angular-application/
+    1.4138° N, 103.8097° E
+Mandai Crematorium and Columbarium Complex
+
+1.3798° N, 103.6890° E
+ choa chu kang cemetery
+ demodata ->  
+{cck_cam1: {…}, cck_cam2: {…}, cck_cam3: {…}, cck_cam4: {…}, mcc_cam1: {…}, …}
+cck_cam1:
+current_update: "2021-03-18 13:00:34"
+last_update: "2021-03-18 12:55:34"
+__proto__: Object
+cck_cam2: {last_update: "2021-03-18 12:55:34", current_update: "2021-03-18 13:00:34"}
+cck_cam3: {last_update: "2021-03-18 12:55:34", current_update: "2021-03-18 13:00:34"}
+cck_cam4: {last_update: "2021-03-18 12:55:34", current_update: "2021-03-18 13:00:34"}
+mcc_cam1: {last_update: "2021-03-18 12:55:34", current_update: "2021-03-18 13:00:34"}
+mcc_cam2: {last_update: "2021-03-18 12:55:34", current_update: "2021-03-18 13:00:34"}
+mcc_cam3: {last_update: "2021-03-18 12:55:34", current_update: "2021-03-18 13:00:34"}
+mcc_cam4: {last_update: "2021-03-18 12:55:34", current_update: "2021-03-18 13:00:34"}
+mcc_cam5: {last_update: "2021-03-18 12:55:34", current_update: "2021-03-18 13:00:34"}
+mcc_cam6: {last_update: "2021-03-18 12:55:34", current_update: "2021-03-18 13:00:34"}
+__proto__: Object
+        </div> -->
+
+        <div class="row" style="display: flex;">
+            <div class="col-md-12">
+                <img src="assets/nea.png" alt="image" style="width:350px;height: 150px;">
+            </div>
+            <div class="col-md-12">
+                 <h3>&nbsp; &nbsp; &nbsp;Live traffic images from cameras at Chua Chu Kang Cemetery.</h3><br>
+                 <h3>&nbsp; &nbsp; &nbsp;These images will refresh automatically every 5 minutes.</h3>
+                 <!-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Last Update : </b>{{Players.cck_cam1.last_update}} -->
+            </div>
+        </div>
+        
+        <!-- <agm-map [latitude]="lat" [longitude]="lng" style="height: 300px;">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map> -->
+        <!-- <div class="card" style="width: 800px;max-width: 800px;position: relative;top: 10px;left: 400px;">
+            <div class="card-header">
+                <label><h3>View Snapshot</h3></label>
+            </div>
+            <div class="card-body">
+                <div class="row" style="display: flex;">
+                    <div class="col-md-2">
+                        <label>Select Camera</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-control" [(ngModel)]="camname" (change)="changeCam()">
+                            <option *ngFor="let item of camList" value="{{item.name}}">{{item.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+        <!-- <div class="row mx-3 my-4" style="display: flex;">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="assets/singapore.jpg" alt="image" style="width:100%">
+                <div class="card-body">
+                  <h4 class="card-title">John Doe</h4> -->
+                  <!-- <p class="card-text">Location & Time</p>
+                   <a href="#" class="btn btn-primary">See Profile</a> 
+                </div>
+            </div>
+        </div>  -->
+        <!-- <div class="row">
+        <div *ngFor="let item of camList">
+        
+            <div class="row mx-3 my-4" style="display: flex;">
+                <div class="card" style="width:400px">
+                    <img class="card-img-top" src="{{item.snaplink}}" alt="image" style="width:100%">
+                    <div class="card-body">
+                     
+                      <p class="card-text">{{item.location}} {{item.time}}</p>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+            </div> -->
+            <div class="row mx-3 my-4" style="display: flex;">
+                <div class="card mx-3 my-3">
+                    
+                    <div class="card-body">
+                     <strong> <p class="card-text">View of Road Junction of Jalan Bahar & Old Choa Chu Kang Road
+                          <!-- <b>Last Update : </b>{{Players.cck_cam1.last_update}} -->
+                      </p></strong>
+                    </div><br>
+                    <img class="card-img-bottom" src="assets/snapshot/cck_cam1.jpeg" alt="image" style="width:100%">
+                    <!-- <strong><p class="first-txt"> 
+                        Mandai Crematorium<br>
+                        Columbarium
+                </p > </strong>
+                <strong><p class="first-txt2"> 
+                    Upper Thomson<br>
+                    Road
+            </p > </strong> -->
+                </div>
+        
+                <div class="card mx-3 my-3">
+                    <div class="card-body">
+                        <strong><p class="card-text">View of Road Junction of Chinese Cemetery Path 4 & Old Choa Chu Kang Road
+                            <!-- <b>Last Update : </b>{{Players.cck_cam2.last_update}} -->
+                        </p></strong>
+                      </div><br>
+                      <img class="card-img-bottom" src="assets/snapshot/cck_cam2.jpeg" alt="image" style="width:100%">
+                </div>
+        
+                <div class="card mx-3 my-3">
+                    <div class="card-body">
+                       <strong><p class="card-text">View of CCK Columbarium(carpark at the left side of main entrance)
+                            <!-- <b>Last Update : </b>{{Players.cck_cam3.last_update}} -->
+                        </p></strong> 
+                      </div><br>
+                      <img class="card-img-bottom" src="assets/snapshot/cck_cam3.jpeg" alt="image" style="width:100%">
+                </div>
+                
+                <div class="card mx-3 my-3">
+                    <div class="card-body">
+                       <strong> <p class="card-text">View of CCK Columbarium(carpark at the right side of main entrance)
+                            <!-- <b>Last Update : </b>{{Players.cck_cam4.last_update}} -->
+                        </p></strong>
+                      </div><br>
+                      <img class="card-img-bottom" src="assets/snapshot/cck_cam4.jpeg" alt="image" style="width:100%">
+                </div>
+            </div>
+            <div>
+                <!-- <p style="align-items: center;">Powered By Nea Echol</p> -->
+            </div>
+
+            <div class="row">
+
+                <!--<iframe src="https://maps.google.com/maps?q={{HomestayDetails.HsMapLat}},{{HomestayDetails.HsMapLong}}&z=16&output=embed" width="100%" height="450" allowfullscreen="" loading="lazy" style="border:1px solid #ccc"></iframe>-->
+                <iframe [src]="FullMapUrl" width="100%" height="450" allowfullscreen="" loading="lazy" style="border:2px solid #ccc"></iframe>
+        
+              </div>

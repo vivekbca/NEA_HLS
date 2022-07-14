@@ -1,0 +1,40 @@
+<div>
+    <!-- <nav class="navbar navbar-expand-sm navbar-dark bg-primary"> -->
+    <nav class="navbar navbar-expand-sm" style="background: #811a1b;">
+        <img src="assets/Echollogo.png" height="70px" width="200px">&nbsp;&nbsp;&nbsp;
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynav">
+        <ul class="navbar-nav mr-auto w-100" >
+            <li class="nav-item" *ngIf="showUser">
+                <a class="nav-link" routerLink="/container/cameraconfig" style="color: aliceblue;">Camera Allotment</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" routerLink="/container/dashboard" style="color: aliceblue;">Dashboard</a>
+            </li>
+            
+            <li class="nav-item" *ngIf="showUser">
+                <a class="nav-link" routerLink="/container/logreport" style="color: aliceblue;">Log Report</a>
+            </li>
+        
+         
+            <!-- <li class="nav-item" *ngIf="showUser">
+                <a class="nav-link" routerLink="/container/snapshot" style="color: aliceblue;">Snap Shot</a>
+            </li> -->
+            <li class="nav-item" *ngIf="showUser">
+                <a class="nav-link" routerLink="/container/adduser" style="color: aliceblue;">User Management</a>
+            </li>
+           
+            <li class="nav-item ml-auto">
+                <a class="nav-link" routerLink (click)="logout()" style="color: aliceblue;">Logout</a>
+            </li>
+ 
+             
+        </ul>
+    </div>
+    </nav>
+  </div>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+    </div>

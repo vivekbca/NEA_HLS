@@ -1,0 +1,127 @@
+<app-masterheader></app-masterheader>
+
+<!-- add user -->
+<div class="card" *ngIf="flag_addCamera" style="width: 800px;max-width: 800px;position: relative;top: 100px;left: 300px;">
+    <div class="app" style="display: flex;">
+            <button class="btn btn-warning" type="button" (click)="addCamera()">ADD CAMERA</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" type="button" (click)="deleteCamera()">DELETE CAMERA</button>&nbsp;&nbsp;
+            <button class="btn btn-success" type="button" (click)="editCamera()">EDIT CAMERA</button>&nbsp;&nbsp;
+    </div>
+    <br>
+    <div class="card-header">
+        <h3>Camera Allotment</h3>
+    </div>
+    <div class="card-body">
+        <div class="row" style="display: flex;">
+           
+            <div class="col-md-4">
+                <label>User Category <span style="color: red;">*</span></label>
+                <select class="form-control" [(ngModel)]="role" (change)="changeUser()">
+                    <option value="CCK">CCK</option>
+                    <option value="MCC">MCC</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>Camera Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="cam_name">
+            </div>
+            <div class="col-md-4">
+                <label>Channel Number <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="camera_name">
+            </div>
+            <div class="col-md-4">
+                <label>Camera IP <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="camera_ip">
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-danger" (click)="addCam()" type="button">SUBMIT</button>
+    </div>
+</div>
+
+<!-- DELETE CAMERA -->
+<div class="card" *ngIf="flag_deleteCamera" style="width: 800px;max-width: 800px;position: relative;top: 100px;left: 300px;">
+    <div class="app" style="display: flex;">
+            <button class="btn btn-warning" type="button" (click)="addCamera()">ADD CAMERA</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" type="button" (click)="deleteCamera()">DELETE CAMERA</button>&nbsp;&nbsp;
+            <button class="btn btn-success" type="button" (click)="editCamera()">EDIT CAMERA</button>&nbsp;&nbsp;
+    </div>
+    <br>
+    <div class="card-header">
+        <h3>Disconnect Camera</h3>
+    </div>
+    <div class="card-body">
+        <div class="row" style="display: flex;">
+           
+            <div class="col-md-4">
+                <label>User Category <span style="color: red;">*</span></label>
+                <select class="form-control" [(ngModel)]="role" (change)="changeUser()">
+                    <option value="CCK">CCK</option>
+                    <option value="MCC">MCC</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>Camera Installed <span style="color: red;">*</span></label>
+                <select class="form-control" (click)="getCam()" [(ngModel)]="camname">
+                    <option *ngFor="let item of camList" value="{{item.cameraname}}" >{{item.cameraname}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-danger" (click)="removeCam()" type="button">SUBMIT</button>
+    </div>
+</div>
+
+<!-- EDIT CAMERA -->
+<div class="card" *ngIf="flag_editCamera" style="width: 800px;max-width: 800px;position: relative;top: 100px;left: 300px;">
+    <div class="app" style="display: flex;">
+            <button class="btn btn-warning" type="button" (click)="addCamera()">ADD CAMERA</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" type="button" (click)="deleteCamera()">DELETE CAMERA</button>&nbsp;&nbsp;
+            <button class="btn btn-success" type="button" (click)="editCamera()">EDIT CAMERA</button>&nbsp;&nbsp;
+    </div>
+    <br>
+    <div class="card-header">
+        <h3>Edit Camera Configuration</h3>
+    </div>
+    <div class="card-body">
+        <div class="row" style="display: flex;">
+           
+            <div class="col-md-4">
+                <label>Select Camera Name<span style="color: red;">*</span></label>
+ 
+                <select class="form-control" [(ngModel)]="edit_cameraid" (change)="checkEvent_Edit()">
+                    <option *ngFor="let item of camListfordel" value="{{item.ID}}">{{item.cameraname}}</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>Channel Number <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="channelNumber">
+            </div>
+            <div class="col-md-4">
+                <label>Camera IP <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="CameraIp">
+            </div>
+            <br>
+            <div class="col-md-4">
+                <label>Edit Camera Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="CameraName">
+            </div>
+            <div class="col-md-4">
+                <label>User Category <span style="color: red;">*</span></label>
+                <select class="form-control" [(ngModel)]="editRole">
+                    <option value="CCK">CCK</option>
+                    <option value="MCC">MCC</option>
+                </select>
+            </div>
+           
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-danger" (click)="EditCam()" type="button">SUBMIT</button>
+    </div>
+</div>
+
+
+
